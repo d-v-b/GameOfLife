@@ -503,6 +503,7 @@ class World:
                        self._view_center[0] + (view_width // 2),
                        self._view_center[1] - (view_height // 2),
                        self._view_center[1] + (view_height // 2))
+
         def ToScreenSpace(x, y):
             """Helper method to convert a Node coordinate into a screen Rect."""
             pixels = self._view_size
@@ -511,6 +512,7 @@ class World:
             return pygame.Rect((screen_width // 2 + x*pixels,
                                 screen_height // 2 + y*pixels,
                                 pixels, pixels))
+
         def DrawCell(x, y):
             """Helper method to draw a cell in Node coordinates to the screen."""
             rect = ToScreenSpace(x, y)
@@ -639,8 +641,8 @@ def main():
         initial_state = ParseFile(sys.argv[1])
     else:
         # Infinite zig-zag
-        initial_state = [(-2,-2), (-2,-1), (-2,2), (-1,-2), (-1,1), (0,-2), (0,1),
-                         (0,2), (1,0), (2,-2), (2,0), (2,1), (2,2)]
+        initial_state = [(-2, -2), (-2, -1), (-2, 2), (-1, -2), (-1, 1), (0, -2), (0, 1),
+                         (0, 2), (1, 0), (2, -2), (2, 0), (2, 1), (2, 2)]
     game = Game(size, World(initial_state))
     game.RunGameLoop()
 
