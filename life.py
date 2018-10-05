@@ -129,6 +129,7 @@ class Node:
                 id(self._ne) == id(other._ne) and
                 id(self._sw) == id(other._sw) and
                 id(self._se) == id(other._se))
+
     def __ne__(self, other):
         return not self.__eq__(other)
 
@@ -190,10 +191,12 @@ class Node:
     def MergeHorizontal(cls, l, r):
         assert l._level == r._level
         return cls.CanonicalNode(l._level, nw=l._ne, ne=r._nw, sw=l._se, se=r._sw)
+
     @classmethod
     def MergeVertical(cls, t, b):
         assert t._level == b._level
         return cls.CanonicalNode(t._level, nw=t._sw, ne=t._se, sw=b._nw, se=b._ne)
+
     @classmethod
     def MergeCenter(cls, nw, ne, sw, se):
         return cls.CanonicalNode(nw._level, nw._se, ne._sw, sw._ne, se._nw)
@@ -292,18 +295,23 @@ class Node:
         # index is the value to skip (i.e. count 3 of 4 cells).
         assert self._level == 1
         return self._nw + self._ne + self._sw + self._se - self.Raw(index)
+
     def SumLeft(self):
         assert self._level == 1
         return self._nw + self._sw
+
     def SumTop(self):
         assert self._level == 1
         return self._nw + self._ne
+
     def SumRight(self):
         assert self._level == 1
         return self._ne + self._se
+
     def SumBottom(self):
         assert self._level == 1
         return self._sw + self._se
+
     def Raw(self, index):
         if index == 0:
             return self._nw
